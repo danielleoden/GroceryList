@@ -11,12 +11,23 @@ function addItem()
   btnClose.classList.add("btn");
   btnClose.classList.add("btn-danger");
   btnClose.classList.add("btn-xs");
+  btnClose.addEventListener("click",removeParentsListItem);
+  
   var iconClose = document.createElement("span");
   iconClose.classList.add("glyphicon");
   iconClose.classList.add("glyphicon-remove");
   btnClose.appendChild(iconClose);
+
   item.appendChild(btnClose);
   list.appendChild(item);
+
+  function removeParentsListItem()
+  {
+    var mom = this.parentNode;
+    var grandma = mom.parentNode;
+    grandma.removeChild(mom);
+
+  }
 
 }
 //courtesy of w3schoolss, from: http://www.w3schools.com/js/js_cookies.asp
