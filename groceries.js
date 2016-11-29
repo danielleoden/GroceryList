@@ -1,4 +1,20 @@
+
 var myList = [];
+
+function saveList()
+{
+var something
+something= myList.toString();
+setCookie("groceries", something, 100);
+
+}
+function clearList()
+{
+
+myList= [];
+document.getElementById("listDisplay").innerHTML = "";
+}
+
 
 function addItem()
 {
