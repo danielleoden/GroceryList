@@ -1,5 +1,46 @@
-
+window.onload = loadCookieList;
 var myList = [];
+function loadCookieList()
+{
+  var groceries;
+  var str = getCookie("groceries");
+  var arrayCookie = str.split(",");
+  for(groceries = 0; arrayCookie.length > groceries; groceries++)
+  {
+    displayItem(arrayCookie[groceries]);
+  
+  }
+
+}
+function displayItem(fooditem)
+{
+  var index =  myList.indexOf(fooditem);
+
+  if (index == -1)
+  {
+    myList.push(fooditem);
+    var list = document.getElementById("listDisplay");
+    var item = document.createElement("li");
+    var itemName = document.createTextNode(fooditem);
+    item.appendChild(itemName);
+
+    document.getElementById("newItem").value = "";
+    var btnClose = document.createElement("button");
+    btnClose.classList.add("btn");
+    btnClose.classList.add("btn-danger");
+    btnClose.classList.add("btn-xs");
+    btnClose.addEventListener("click",removeParentsListItem);
+
+    var iconClose = document.createElement("span");
+    iconClose.classList.add("glyphicon");
+    iconClose.classList.add("glyphicon-remove");
+    btnClose.appendChild(iconClose);
+
+    item.appendChild(btnClose);
+    list.appendChild(item);
+  }
+
+}
 
 function saveList()
 {
@@ -20,31 +61,9 @@ function addItem()
 {
 
   var input = document.getElementById("newItem").value;
-  var index =  myList.indexOf(input);
 
-  if (index == -1)
-  {
-    myList.push(input);
-    var list = document.getElementById("listDisplay");
-    var item = document.createElement("li");
-    var itemName = document.createTextNode(input);
-    item.appendChild(itemName);
+  displayItem(input);
 
-    document.getElementById("newItem").value = "";
-    var btnClose = document.createElement("button");
-    btnClose.classList.add("btn");
-    btnClose.classList.add("btn-danger");
-    btnClose.classList.add("btn-xs");
-    btnClose.addEventListener("click",removeParentsListItem);
-
-    var iconClose = document.createElement("span");
-    iconClose.classList.add("glyphicon");
-    iconClose.classList.add("glyphicon-remove");
-    btnClose.appendChild(iconClose);
-
-    item.appendChild(btnClose);
-    list.appendChild(item);
-  }
 
 
 
